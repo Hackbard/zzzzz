@@ -32,7 +32,7 @@ class Fetcher():
         'dnt': '1',
         'origin': 'https://www.facebook.com',
         'referer': 'https://www.facebook.com/',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36'
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
     }
 
     # Hey hey, Facebook puts this in front of all their JSON to prevent hijacking. But don't worry, we're ~verified secure~.
@@ -116,9 +116,9 @@ class Fetcher():
                     for key in item["overlay"]:
                         if type(item["overlay"][key]) == dict:
                             uid = key
-
-                            # Log the LAT in this message.
-                            self._log_lat(uid, str(item["overlay"][uid]["la"]))
+                            if "la" in item["overlay"][uid]:
+                                # Log the LAT in this message.
+                                self._log_lat(uid, str(item["overlay"][uid]["la"]))
 
                             # Now log their current status.
                             if "p" in item["overlay"][uid]:
